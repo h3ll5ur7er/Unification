@@ -1,10 +1,8 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Unification
+﻿namespace Unification
 {
     /// <summary>
     /// Definition of the tokens
-    /// use RegexPatternAttribute on the tokens to define the pattern to match
+    /// Use RegexPatternAttribute on the tokens to define the pattern to match
     /// </summary>
     public enum Token
     {

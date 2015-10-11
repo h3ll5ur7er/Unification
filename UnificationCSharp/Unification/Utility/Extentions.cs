@@ -18,12 +18,5 @@ namespace Unification
                 .ConstructorArguments
                 .Select(x => x.Value.ToString())
                 .First();
-
-        /// <summary>
-        /// Create a new Tokendefinition from a Token
-        /// </summary>
-        /// <param name="t">target token</param>
-        /// <returns>new TokenDefinition of t</returns>
-        //public static Lexer.TokenDefinition Definition(this Token t) => new Lexer.TokenDefinition(t);
     }
 }

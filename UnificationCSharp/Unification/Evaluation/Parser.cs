@@ -5,12 +5,10 @@ namespace Unification
 {
     public static class Parser
     {
-        static readonly Stack<string> funcStack = new Stack<string>();
-        static readonly Stack<List<IExpression>> paramStack = new Stack<List<IExpression>>();
-
-        //static VariableRegistry registry = new VariableRegistry();
-
-        static void EvalToken(ref Lexer l, out IExpression expr, ref VariableRegistry registry)
+        static readonly Stack<string> FuncStack = new Stack<string>();
+        static readonly Stack<List<IExpression>> ParamStack = new Stack<List<IExpression>>();
+        
+        static void EvalToken(ref Lexer l, out IExpression expr)
         {
             switch (l.Token)
             {
@@ -19,69 +17,74 @@ namespace Unification
                 case Token.Int:
                 case Token.False:
                 case Token.True:
-                    if (funcStack.Count == 0)
+                    if (FuncStack.Count == 0)
                     {
                         expr = new ValueExpression(l.Value);
                         return;
                     }
-                    paramStack.Peek().Add(new ValueExpression(l.Value));
+                    ParamStack.Peek().Add(new ValueExpression(l.Value));
                     break;
+
                 case Token.Variable:
-                    if (funcStack.Count == 0)
+                    if (FuncStack.Count == 0)
                     {
-                        expr = new VariableExpression(l.Value, ref registry);
+                        expr = new VariableExpression(l.Value);
                         return;
                     }
-                    paramStack.Peek().Add(new VariableExpression(l.Value, ref registry));
+                    ParamStack.Peek().Add(new VariableExpression(l.Value));
                     break;
+
                 case Token.Function:
-                    funcStack.Push(l.Value);
+                    FuncStack.Push(l.Value);
                     break;
+
                 case Token.LeftBrace:
-                    paramStack.Push(new List<IExpression>());
+                    ParamStack.Push(new List<IExpression>());
                     break;
+
                 case Token.RightBrace:
-                    if(funcStack.Count == 1)
+                    if(FuncStack.Count == 1)
                     {
-                        var p =  paramStack.Pop().ToArray();
-                        expr = new FunctionExpression(funcStack.Pop(), p);
+                        var p =  ParamStack.Pop().ToArray();
+                        expr = new FunctionExpression(FuncStack.Pop(), p);
                         return;
                     }
-                    var param =  paramStack.Pop().ToArray();
-                    paramStack.Peek().Add(new FunctionExpression(funcStack.Pop(),param));
-                    
+                    var param =  ParamStack.Pop().ToArray();
+                    ParamStack.Peek().Add(new FunctionExpression(FuncStack.Pop(),param));
                     break;
+
                 case Token.Comma:
                 case Token.Dot:
                 case Token.Space:
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             expr = null;
         }
 
-        public static IExpression Eval(ref Lexer l, ref VariableRegistry registry)
+        public static IExpression Eval(ref Lexer l)
         {
             if (!l.Next()) return null;
             IExpression expr;
             do
             {
-                EvalToken(ref l, out expr, ref registry);
+                EvalToken(ref l, out expr);
 
             } while (expr == null && l.Next());
             return expr;
         }
         
-        public static IExpression Unify(string input1, string input2, ref VariableRegistry registry, params Token[] tokens)
+        public static IExpression Unify(string input1, string input2, params Token[] tokens)
         {
             var l1 = new Lexer(input1, tokens);
             var l2 = new Lexer(input2, tokens);
 
-            return Unify(Eval(ref l1, ref registry), Eval(ref l2, ref registry), ref registry);
+            return Unify(Eval(ref l1), Eval(ref l2));
         }
 
-        public static IExpression Unify(IExpression ex1, IExpression ex2, ref VariableRegistry registry)
+        public static IExpression Unify(IExpression ex1, IExpression ex2)
         {
             if (ex1.IsVariable)
             {
@@ -93,17 +96,17 @@ namespace Unification
                 }
                 if (ex2.IsFunction)
                 {
-                    registry[(VariableExpression)ex1] = ex2;
+                    VariableRegistry.Instance[(VariableExpression)ex1] = ex2;
                     return ex2;
                 }
-                registry[(VariableExpression)ex1] = ex2;
+                VariableRegistry.Instance[(VariableExpression)ex1] = ex2;
                 return ex2;
             }
             if (ex1.IsFunction)
             {
                 if (ex2.IsVariable)
                 {
-                    registry[(VariableExpression)ex2] = ex1;
+                    VariableRegistry.Instance[(VariableExpression)ex2] = ex1;
                     return ex2;
                 }
                 if (ex2.IsFunction)
@@ -120,7 +123,7 @@ namespace Unification
 
                     for (int i = 0; i < exp1.Expressions.Length; i++)
                     {
-                        exp[i] = Unify(exp1.Expressions[i], exp2.Expressions[i], ref registry);
+                        exp[i] = Unify(exp1.Expressions[i], exp2.Expressions[i]);
                     }
                     return new FunctionExpression(exp1.Value, exp);
                 }
@@ -128,7 +131,7 @@ namespace Unification
             }
             if (ex2.IsVariable)
             {
-                registry[(VariableExpression)ex2] = ex1;
+                VariableRegistry.Instance[(VariableExpression)ex2] = ex1;
                 return ex1;
             }
             if (ex2.IsFunction)

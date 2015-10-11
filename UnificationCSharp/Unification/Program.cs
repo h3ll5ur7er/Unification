@@ -2,8 +2,19 @@
 
 namespace Unification
 {
-    class Program
+    /// <summary>
+    /// Unification unifies two given expressions
+    /// valid tokens:
+    /// values   : "quoted string", 12.345E6 (float), 42 (int), true/false(bool)
+    /// variable : SOMETHING, A, B, X, (Any lowercase string without symbols or spaces)
+    /// function : foo(bar(3.141,true, Y), X, 42), lowercase("letters"), f(g(X))
+    /// </summary>
+    public static class Program
     {
+        /// <summary>
+        /// Main entry point
+        /// </summary>
+        /// <param name="args">arg[0] = function 1, arg[1] = function 2</param>
         static void Main(string[] args)
         {
             //var input1 = "f(X,f(3,2))";
@@ -19,11 +30,9 @@ namespace Unification
                 Environment.ExitCode = -1;
                 return;
             }
-            
-            var registry = new VariableRegistry();
-            var expr = Parser.Unify(args[0], args[1], ref registry);
 
-            Console.WriteLine(expr.ToString());
+            Console.WriteLine(Parser.Unify(args[0], args[1]).ToString());
+
             Environment.ExitCode = 0;
         }
     }

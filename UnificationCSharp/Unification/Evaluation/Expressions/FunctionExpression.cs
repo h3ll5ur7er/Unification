@@ -20,6 +20,9 @@ namespace Unification
         /// Value contains the name of functions and variables and the value of valuetypes
         /// </summary>
         public string Value { get; }
+        /// <summary>
+        /// Parameter expressions
+        /// </summary>
         public IExpression[] Expressions { get; }
         public FunctionExpression(string value, params IExpression[] expr)
         {

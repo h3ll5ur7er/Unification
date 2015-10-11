@@ -2,7 +2,6 @@ namespace Unification
 {
     public class VariableExpression : IExpression
     {
-        private readonly VariableRegistry registry;
         /// <summary>
         /// IsVariable will try to substitute using VariableRegistry
         /// </summary>
@@ -18,12 +17,11 @@ namespace Unification
         /// </summary>
         public string Value { get; }
 
-        public VariableExpression(string value, ref VariableRegistry registry)
+        public VariableExpression(string value)
         {
-            this.registry = registry;
             Value = value;
         }
 
-        public override string ToString() => registry.Contains(Value) ? registry[Value].ToString() : Value;
+        public override string ToString() => VariableRegistry.Instance.Contains(Value) ? VariableRegistry.Instance[this].ToString() : Value;
     }
 }

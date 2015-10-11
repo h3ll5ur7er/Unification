@@ -5,26 +5,15 @@ namespace Unification
 {
     public class VariableRegistry
     {
-        private VariableRegistry me;
-        public VariableRegistry()
+        private static VariableRegistry me;
+        public static VariableRegistry Instance => me ?? (me = new VariableRegistry());
+
+        private VariableRegistry()
         {
             me = this;
         }
+
         readonly Dictionary<string,IExpression> registry = new Dictionary<string, IExpression>(); 
-        public IExpression this[string key]
-        {
-            get { return registry.ContainsKey(key) ? registry[key] : new VariableExpression(key, ref me); }
-            set
-            {
-                if (registry.ContainsKey(key))
-                {
-                    if(registry[key].Value==value.Value)
-                        return;
-                    throw new Exception("registry values missmatch " + value + " + " +registry[key]);
-                }
-                registry.Add(key, value);
-            }
-        }
 
         public IExpression this[VariableExpression key]
         {
