@@ -4,3 +4,7 @@ d:\benutzerdaten\emma\documents\visual studio 2013\Projects\Unification\Unificat
 d:\benutzerdaten\emma\documents\visual studio 2013\Projects\Unification\Unification\obj\Debug\Unification.csprojResolveAssemblyReference.cache
 d:\benutzerdaten\emma\documents\visual studio 2013\Projects\Unification\Unification\obj\Debug\Unification.exe
 d:\benutzerdaten\emma\documents\visual studio 2013\Projects\Unification\Unification\obj\Debug\Unification.pdb
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\Debug\Unification.exe.config
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\Debug\Unification.exe
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\Debug\Unification.pdb
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\Debug\UnificationCSharp.exe.config

@@ -1,0 +1,6 @@
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\UnificationCSharp.exe.config
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\x86\Release\Unification.csprojResolveAssemblyReference.cache
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\UnificationCSharp.exe
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\UnificationCSharp.pdb
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\x86\Release\UnificationCSharp.exe
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\x86\Release\UnificationCSharp.pdb

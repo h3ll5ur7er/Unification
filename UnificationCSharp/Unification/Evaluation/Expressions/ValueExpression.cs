@@ -2,18 +2,25 @@ namespace Unification
 {
     public class ValueExpression : IExpression
     {
-        public bool IsVariable { get { return false; } }
-        public bool IsFunction { get { return false; } }
+        /// <summary>
+        /// IsVariable will try to substitute using VariableRegistry
+        /// </summary>
+        public bool IsVariable => false;
+        /// <summary>
+        /// IsFunction will capture parameters in braces following the value
+        /// </summary>
+        public bool IsFunction => false;
+
+        /// <summary>
+        /// Value contains the name of functions and variables and the value of valuetypes
+        /// </summary>
+        public string Value { get; }
+
         public ValueExpression(string value)
         {
             Value = value;
         }
 
-        public string Value { get; private set; }
-
-        public override string ToString()
-        {
-            return Value;
-        }
+        public override string ToString() => Value;
     }
 }

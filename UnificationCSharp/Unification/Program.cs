@@ -6,7 +6,6 @@ namespace Unification
     {
         static void Main(string[] args)
         {
-            var eval = new Evaluator();
             //var input1 = "f(X,f(3,2))";
             //var input2 = "f(g(Y,5),Y)";
 
@@ -20,17 +19,9 @@ namespace Unification
                 Environment.ExitCode = -1;
                 return;
             }
-
-            var input1 = args[0];
-            var input2 = args[1];
-
-            //var l1 = new Lexer(input1);
-            //var l2 = new Lexer(input2);
-
-            //var expr1 = eval.Eval(ref l1);
-            //var expr2 = eval.Eval(ref l2);
-
-            var expr = eval.Unify(input1, input2);
+            
+            var registry = new VariableRegistry();
+            var expr = Parser.Unify(args[0], args[1], ref registry);
 
             Console.WriteLine(expr.ToString());
             Environment.ExitCode = 0;

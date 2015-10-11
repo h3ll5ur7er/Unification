@@ -1,0 +1,5 @@
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x64\Debug\UnificationCSharp.exe.config
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x64\Debug\UnificationCSharp.exe
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x64\Debug\UnificationCSharp.pdb
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\x64\Debug\UnificationCSharp.exe
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\x64\Debug\UnificationCSharp.pdb

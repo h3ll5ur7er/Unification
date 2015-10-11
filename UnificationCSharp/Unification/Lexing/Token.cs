@@ -1,18 +1,24 @@
-﻿namespace Unification
+﻿using System.Text.RegularExpressions;
+
+namespace Unification
 {
+    /// <summary>
+    /// Definition of the tokens
+    /// use RegexPatternAttribute on the tokens to define the pattern to match
+    /// </summary>
     public enum Token
     {
-        [RegexPattern(@"([""'])(?:\\\1|.)*?\1")]        QUOTED_STRING,
-        [RegexPattern(@"[-+]?\d*\.\d+([eE][-+]?\d+)?")] FLOAT,
-        [RegexPattern(@"[-+]?\d+")]                     INT,
-        [RegexPattern(@"true")]                         TRUE,
-        [RegexPattern(@"false")]                        FALSE,
-        [RegexPattern(@"[*<>\?\-+/a-z->!]+")]           FUNCTION,
-        [RegexPattern(@"[*<>\?\-+/A-Z->!]+")]           VARIABLE,
-        [RegexPattern(@"\.")]                           DOT,
-        [RegexPattern(@",")]                            COMMA,
-        [RegexPattern(@"\(")]                           LEFT,
-        [RegexPattern(@"\)")]                           RIGHT,
-        [RegexPattern(@"\s")]                           SPACE
+        [RegexPattern(@"([""'])(?:\\\1|.)*?\1")]        QuotedString,
+        [RegexPattern(@"[-+]?\d*\.\d+([eE][-+]?\d+)?")] Float,
+        [RegexPattern(@"[-+]?\d+")]                     Int,
+        [RegexPattern(@"true")]                         True,
+        [RegexPattern(@"false")]                        False,
+        [RegexPattern(@"[*<>\?\-+/a-z->!]+")]           Function,
+        [RegexPattern(@"[*<>\?\-+/A-Z->!]+")]           Variable,
+        [RegexPattern(@"\.")]                           Dot,
+        [RegexPattern(@",")]                            Comma,
+        [RegexPattern(@"\(")]                           LeftBrace,
+        [RegexPattern(@"\)")]                           RightBrace,
+        [RegexPattern(@"\s")]                           Space
     }
 }
