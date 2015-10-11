@@ -16,7 +16,7 @@ The mgu for two functions is unique
 C, C#, F#, Haskell, Java, Nemerle, Scala
 
 ### Documentation
-##### C#
+##### C# 
 The program takes two arguments to not only show the usage instructions.
 
 Possible tokens:
