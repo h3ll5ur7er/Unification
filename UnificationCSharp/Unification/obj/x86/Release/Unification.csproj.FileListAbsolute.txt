@@ -3,3 +3,6 @@ D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\Unificati
 D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\UnificationCSharp.pdb
 D:\_code\git\Unification\UnificationCSharp\Unification\obj\x86\Release\UnificationCSharp.exe
 D:\_code\git\Unification\UnificationCSharp\Unification\obj\x86\Release\UnificationCSharp.pdb
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\UnificationCSharp.exe.CodeAnalysisLog.xml
+D:\_code\git\Unification\UnificationCSharp\Unification\bin\x86\Release\UnificationCSharp.exe.lastcodeanalysissucceeded
+D:\_code\git\Unification\UnificationCSharp\Unification\obj\x86\Release\Unification.csprojResolveAssemblyReference.cache

@@ -8,6 +8,41 @@ namespace Unification
         static readonly Stack<string> FuncStack = new Stack<string>();
         static readonly Stack<List<IExpression>> ParamStack = new Stack<List<IExpression>>();
         
+        /// <summary>
+        /// Unify given expressions using tokens
+        /// </summary>
+        /// <param name="input1">first expression</param>
+        /// <param name="input2">second expression</param>
+        /// <param name="tokens">array of tokens to match</param>
+        /// <returns>most general unifier</returns>
+        public static IExpression Unify(string input1, string input2, params Token[] tokens)
+        {
+            var l1 = new Lexer(input1, tokens);
+            var l2 = new Lexer(input2, tokens);
+
+            return Unify(Eval(ref l1), Eval(ref l2));
+        }
+        /// <summary>
+        /// Consumes Tokens from Lexer l until a expression is paresed completely
+        /// </summary>
+        /// <param name="l">Lexical analyzer if the expression to parse</param>
+        /// <returns>parsed expression</returns>
+        public static IExpression Eval(ref Lexer l)
+        {
+            if (!l.Next()) return null;
+            IExpression expr;
+            do
+            {
+                EvalToken(ref l, out expr);
+
+            } while (expr == null && l.Next());
+            return expr;
+        }
+        /// <summary>
+        /// Consume next token
+        /// </summary>
+        /// <param name="l">the lexer</param>
+        /// <param name="expr">output expression</param>
         static void EvalToken(ref Lexer l, out IExpression expr)
         {
             switch (l.Token)
@@ -63,27 +98,12 @@ namespace Unification
             }
             expr = null;
         }
-
-        public static IExpression Eval(ref Lexer l)
-        {
-            if (!l.Next()) return null;
-            IExpression expr;
-            do
-            {
-                EvalToken(ref l, out expr);
-
-            } while (expr == null && l.Next());
-            return expr;
-        }
-        
-        public static IExpression Unify(string input1, string input2, params Token[] tokens)
-        {
-            var l1 = new Lexer(input1, tokens);
-            var l2 = new Lexer(input2, tokens);
-
-            return Unify(Eval(ref l1), Eval(ref l2));
-        }
-
+        /// <summary>
+        /// Unify the given Expressions
+        /// </summary>
+        /// <param name="ex1">first expression</param>
+        /// <param name="ex2">second expression</param>
+        /// <returns>most general unifier</returns>
         public static IExpression Unify(IExpression ex1, IExpression ex2)
         {
             if (ex1.IsVariable)

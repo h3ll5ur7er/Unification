@@ -31,7 +31,10 @@ namespace Unification
                 return;
             }
 
-            Console.WriteLine(Parser.Unify(args[0], args[1]).ToString());
+            Console.WriteLine($"input 1: {args[0]}");
+            Console.WriteLine($"input 2: {args[1]}");
+
+            Console.WriteLine($"unified: {Parser.Unify(args[0], args[1])}");
 
             Environment.ExitCode = 0;
         }
